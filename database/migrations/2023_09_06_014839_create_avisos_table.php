@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('avisos', function (Blueprint $table) {
             $table->string('code', 50)->unique('CODE')->comment('Ref cod');
             $table->string('title');
-            // Lugar de la llave foránea code_area
+            $table->string('code_area', 50)->nullable();
+            $table->foreign('code_area')
+                  ->reference('code')
+                  ->on('areas');
             $table->timestamps();
             $table->timestamp('date_expiration');
             $table->timestamp('date_published');
